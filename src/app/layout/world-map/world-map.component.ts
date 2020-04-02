@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from "@angular/core";
 import {} from "googlemaps";
+import worldmapConfig from '../../../assets/world-map.json';
 
 @Component({
   selector: "app-world-map",
@@ -10,8 +11,13 @@ export class WorldMapComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {}
-  title = "Global Spread - Covid19";
-  type = "GeoChart";
+  title = (<any>worldmapConfig).title;
+  type = (<any>worldmapConfig).type;
+  columnNames = (<any>worldmapConfig).columnNames;
+  options = {};
+  width = 1000;
+  height = 500;
+
   data = [
     ["Germany", 200, 124],
     ["United States", 300, 545],
@@ -23,8 +29,4 @@ export class WorldMapComponent implements OnInit {
     ["India", 15800, 55],
     ["Australia",12554,12]
   ];
-  columnNames = ["Country", "Infected", "Deaths"];
-  options = {};
-  width = 1000;
-  height = 500;
 }

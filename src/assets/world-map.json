@@ -1,0 +1,11 @@
+{
+    "title": "Global Spread - Covid19",
+    "type": "GeoChart",
+    "columnNames": [
+        "Country",
+        "Infected",
+        "Deaths"
+    ],
+    "width": 1000,
+    "height": 500
+}

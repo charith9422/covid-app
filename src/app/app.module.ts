@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule,APP_INITIALIZER } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -9,6 +9,11 @@ import { CountriesComponent } from './countries/countries.component';
 import { NavbarComponent } from './layout/navbar/navbar.component';
 import { WorldMapComponent } from './layout/world-map/world-map.component';
 import { GoogleChartsModule } from 'angular-google-charts';
+import { InitialService } from './services/initial.service';
+import { ConfigurationService } from './services/configuration.service';
+import { HttpClientModule } from "@angular/common/http";
+import { NgxSpinnerModule } from "ngx-spinner";
+
 
 @NgModule({
   declarations: [
@@ -19,12 +24,26 @@ import { GoogleChartsModule } from 'angular-google-charts';
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     BrowserAnimationsModule,
     MaterialModule,
     AppRoutingModule,
+    NgxSpinnerModule,
     GoogleChartsModule.forRoot(''),
   ],
-  providers: [],
+  providers: [
+    InitialService,
+    {
+      provide: APP_INITIALIZER,
+      useFactory: ConfigLoader,
+      deps: [InitialService],
+      multi: true
+    },
+    ConfigurationService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+export function ConfigLoader(configService: InitialService) {
+  return () => configService.load("../assets/configuration.json");
+}

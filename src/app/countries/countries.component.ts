@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-
+import { ICountriesResponse } from '../models/countriesResponse';
+import { CountriesService } from '../services/countries.service';
 @Component({
   selector: 'app-countries',
   templateUrl: './countries.component.html',
@@ -7,9 +8,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CountriesComponent implements OnInit {
 
-  constructor() { }
+  countries:ICountriesResponse;
+  constructor(private countriesService:CountriesService) { }
 
   ngOnInit(): void {
+    this.getCountryDetails();
+  }
+
+  getCountryDetails(){
+    this.countriesService.getCountries().subscribe(countries=>{
+      this.countries = countries;
+      console.log(countries)
+    });
   }
 
 }
