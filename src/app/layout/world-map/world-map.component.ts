@@ -1,6 +1,7 @@
-import { Component, OnInit, ViewChild } from "@angular/core";
+import { Component, OnInit, ViewChild, Input } from "@angular/core";
 import {} from "googlemaps";
 import worldmapConfig from '../../../assets/world-map.json';
+import { Country } from '../../models/country';
 
 @Component({
   selector: "app-world-map",
@@ -10,6 +11,8 @@ import worldmapConfig from '../../../assets/world-map.json';
 export class WorldMapComponent implements OnInit {
   constructor() {}
 
+  //@Input() country:Country;
+  
   ngOnInit(): void {}
   title = (<any>worldmapConfig).title;
   type = (<any>worldmapConfig).type;

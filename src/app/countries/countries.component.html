@@ -2,9 +2,6 @@
     <p style="color: white">Loading...</p>
 </ngx-spinner>
 <app-navbar></app-navbar>
-<!-- <ul *ngFor="let country of countries">
-    <li>{{country.covid19Stats}}</li>
-</ul> -->
 <div class="container">
     <mat-card class="content">
         <mat-card-title style="text-align: center;">
@@ -42,5 +39,23 @@
     </mat-card>
 </div>
 <div class="container" style="padding-bottom: 5em;">
-    <app-world-map></app-world-map>
+    <div *ngIf="countries">
+        <!-- <app-world-map *ngFor="let country of countries.data.covid19Stats" [country]="country"></app-world-map> -->
+        <div class="container map">
+            <google-chart #chart
+            [title]="title"
+            [type]="type"
+            [data]="data"
+            [columnNames]="columnNames"
+            [options]="options"
+            [width]="width"
+            [height]="height">
+            </google-chart>
+        </div>
+    </div>
+    <!-- <div *ngIf="countries">
+        <ul *ngFor="let country of countries.data.covid19Stats">
+            <li>{{country.country}}</li>
+        </ul>
+    </div> -->
 </div>

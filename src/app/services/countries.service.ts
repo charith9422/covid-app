@@ -2,12 +2,12 @@ import { Injectable } from "@angular/core";
 import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import { InitialService } from "./initial.service";
 import { Observable, throwError } from "rxjs";
-import { ICountriesResponse } from "../models/countriesResponse";
 import { catchError, retry, toArray } from "rxjs/operators";
 import { ConfigurationService } from "./configuration.service";
+import { DataResponse } from "../models/data-response";
 
 @Injectable({
-  providedIn: "root"
+  providedIn: "root",
 })
 export class CountriesService {
   constructor(
@@ -19,9 +19,9 @@ export class CountriesService {
   serverUrl: string = this.initialService.getHost();
   httpOptions = this.configurationService.httpOptions;
 
-  getCountries(): Observable<ICountriesResponse> {
+  getCountries(): Observable<DataResponse> {
     return this.http
-      .get<ICountriesResponse>(this.serverUrl, this.httpOptions)
+      .get<DataResponse>(this.serverUrl, this.httpOptions)
       .pipe(retry(3), catchError(this.handleError));
   }
   private handleError(error: HttpErrorResponse) {
