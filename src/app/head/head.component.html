@@ -1,0 +1,36 @@
+<div class="container" *ngIf="countries">
+    <mat-card class="content" *ngFor="let srilanka of countries.data.covid19Stats">
+        <mat-card-title style="text-align: center;">
+            <p class="mat-display-3">Sri Lanka Statistics</p>
+        </mat-card-title>
+        <mat-divider></mat-divider>
+        <mat-card-content>
+            <div class="row">
+                <div class="col-md">
+                    <h1 class="mat-headline texts">
+                        <span>
+                            <mat-icon>accessible</mat-icon>
+                        </span>Infected
+                    </h1>
+                    <h2 class="mat-body-strong texts">{{srilanka.confirmed}}</h2>
+                </div>
+                <div class="col-md">
+                    <h1 class="mat-headline texts">
+                        <span>
+                            <mat-icon>airline_seat_individual_suite</mat-icon>
+                        </span>Deaths
+                    </h1>
+                    <h2 class="mat-body-strong texts">{{srilanka.deaths}}</h2>
+                </div>
+                <div class="col-md">
+                    <h1 class="mat-headline texts">
+                        <span>
+                            <mat-icon>accessibility_new</mat-icon>
+                        </span>Recovered
+                    </h1>
+                    <h2 class="mat-body-strong texts">{{srilanka.recovered}}</h2>
+                </div>
+            </div>
+        </mat-card-content>
+    </mat-card>
+</div>

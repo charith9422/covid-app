@@ -13,6 +13,7 @@ import { InitialService } from './services/initial.service';
 import { ConfigurationService } from './services/configuration.service';
 import { HttpClientModule } from "@angular/common/http";
 import { NgxSpinnerModule } from "ngx-spinner";
+import { HeadComponent } from './head/head.component';
 
 
 @NgModule({
@@ -20,7 +21,8 @@ import { NgxSpinnerModule } from "ngx-spinner";
     AppComponent,
     CountriesComponent,
     NavbarComponent,
-    WorldMapComponent
+    WorldMapComponent,
+    HeadComponent
   ],
   imports: [
     BrowserModule,

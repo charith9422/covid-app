@@ -2,44 +2,9 @@
     <p style="color: white">Loading...</p>
 </ngx-spinner>
 <app-navbar></app-navbar>
-<div class="container">
-    <mat-card class="content">
-        <mat-card-title style="text-align: center;">
-            <p class="mat-display-3">Sri Lanka Statistics</p>
-        </mat-card-title>
-        <mat-divider></mat-divider>
-        <mat-card-content>
-            <div class="row">
-                <div class="col-md">
-                    <h1 class="mat-headline texts">
-                        <span>
-                            <mat-icon>accessible</mat-icon>
-                        </span>Infected
-                    </h1>
-                    <h2 class="mat-body-strong texts">12</h2>
-                </div>
-                <div class="col-md">
-                    <h1 class="mat-headline texts">
-                        <span>
-                            <mat-icon>airline_seat_individual_suite</mat-icon>
-                        </span>Deaths
-                    </h1>
-                    <h2 class="mat-body-strong texts">12</h2>
-                </div>
-                <div class="col-md">
-                    <h1 class="mat-headline texts">
-                        <span>
-                            <mat-icon>accessibility_new</mat-icon>
-                        </span>Recovered
-                    </h1>
-                    <h2 class="mat-body-strong texts">12</h2>
-                </div>
-            </div>
-        </mat-card-content>
-    </mat-card>
-</div>
+<app-head></app-head>
 <div class="container" style="padding-bottom: 5em;">
-    <div *ngIf="countries">
+    <div *ngIf="data">
         <!-- <app-world-map *ngFor="let country of countries.data.covid19Stats" [country]="country"></app-world-map> -->
         <div class="container map">
             <google-chart #chart

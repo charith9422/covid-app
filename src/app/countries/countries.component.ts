@@ -6,6 +6,8 @@ import { DataResponse } from "../models/data-response";
 import {} from "googlemaps";
 import worldmapConfig from "../../assets/world-map.json";
 import { Worldmap } from "../models/worldmap";
+import { Country } from "../models/country";
+import { MapCountry } from "../models/map-country";
 
 @Component({
   selector: "app-countries",
@@ -13,14 +15,14 @@ import { Worldmap } from "../models/worldmap";
   styleUrls: ["./countries.component.css"],
 })
 export class CountriesComponent implements OnInit {
-  countries: DataResponse;
-  data: Worldmap;
+  //countries: DataResponse;
+  data: MapCountry[] = [];
   title = (<any>worldmapConfig).title;
   type = (<any>worldmapConfig).type;
   columnNames = (<any>worldmapConfig).columnNames;
   options = {};
-  width = 1000;
-  height = 500;
+  width = (<any>worldmapConfig).width;
+  height = (<any>worldmapConfig).height;
 
   constructor(
     private countriesService: CountriesService,
@@ -29,18 +31,39 @@ export class CountriesComponent implements OnInit {
 
   ngOnInit(): void {
     this.spinner.show();
-    this.getCountryDetails();
+    this.getCountryDetailsForMap();
   }
 
-  getCountryDetails() {
-    this.countriesService.getCountries().subscribe((countries) => {
-      this.countries = countries;
-      this.spinner.hide();
-      console.log(countries);
-    });
+  /* getCountryDetails() {
+    this.countriesService.getCountries().subscribe(
+      (countries) => {
+        this.countries = countries;
+        //this.data = ;
+        this.spinner.hide();
+        console.log(countries);
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+  } */
+  getCountryDetailsForMap() {
+    this.countriesService.getCountriesForMap().subscribe(
+      (countries) => {
+        this.data = countries;
+        //debugger
+        //this.data = ;
+        this.spinner.hide();
+        console.log(this.data);
+        return this.data;
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
   }
 
-  /* data = [
+  /*  data = [
     ["Germany", 200, 124],
     ["United States", 300, 545],
     ["Brazil", 1400, 56],

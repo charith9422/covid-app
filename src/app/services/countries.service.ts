@@ -5,6 +5,8 @@ import { Observable, throwError } from "rxjs";
 import { catchError, retry, toArray } from "rxjs/operators";
 import { ConfigurationService } from "./configuration.service";
 import { DataResponse } from "../models/data-response";
+import { MapCountry } from "../models/map-country";
+import config from "../../assets/configuration.json";
 
 @Injectable({
   providedIn: "root",
@@ -18,10 +20,22 @@ export class CountriesService {
 
   serverUrl: string = this.initialService.getHost();
   httpOptions = this.configurationService.httpOptions;
+  endpoint = (<any>config).endPoints.srilanka;
 
-  getCountries(): Observable<DataResponse> {
+  /* getCountries(): Observable<DataResponse> {
     return this.http
       .get<DataResponse>(this.serverUrl, this.httpOptions)
+      .pipe(retry(3), catchError(this.handleError));
+  } */
+  getCountriesForMap(): Observable<MapCountry[]> {
+    return this.http
+      .get<MapCountry[]>(this.serverUrl, this.httpOptions)
+      .pipe(retry(3), catchError(this.handleError));
+  }
+
+  getSriLankaDetails(): Observable<DataResponse> {
+    return this.http
+      .get<DataResponse>(this.serverUrl + this.endpoint, this.httpOptions)
       .pipe(retry(3), catchError(this.handleError));
   }
   private handleError(error: HttpErrorResponse) {

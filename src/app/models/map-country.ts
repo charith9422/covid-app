@@ -1,6 +1,5 @@
 export interface MapCountry {
-  name: string;
-  infected: number;
-  recovered: number;
+  country: string;
+  confirmed: number;
   deaths: number;
 }
