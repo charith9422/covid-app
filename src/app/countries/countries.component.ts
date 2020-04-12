@@ -16,7 +16,7 @@ import { MapCountry } from "../models/map-country";
 })
 export class CountriesComponent implements OnInit {
   //countries: DataResponse;
-  data;
+  data = this.getCountryDetailsForMap();
   title = (<any>worldmapConfig).title;
   type = (<any>worldmapConfig).type;
   columnNames = (<any>worldmapConfig).columnNames;
@@ -31,8 +31,8 @@ export class CountriesComponent implements OnInit {
 
   ngOnInit(): void {
     this.spinner.show();
-    this.getCountryDetailsForMap();
-    this.plotMap();
+    //this.getCountryDetailsForMap();
+    //this.plotMap();
   }
 
   /* getCountryDetails() {
