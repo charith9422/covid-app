@@ -1,14 +1,9 @@
 import { Component, OnInit } from "@angular/core";
 import { CountriesService } from "../services/countries.service";
 import { NgxSpinnerService } from "ngx-spinner";
-import { DataResponse } from "../models/data-response";
-
 import {} from "googlemaps";
 import worldmapConfig from "../../assets/world-map.json";
-import { Worldmap } from "../models/worldmap";
-import { Country } from "../models/country";
-import { MapCountry } from "../models/map-country";
-import { ToastrService } from 'ngx-toastr';
+import { NotificationService } from "../services/notification.service";
 
 @Component({
   selector: "app-countries",
@@ -16,8 +11,7 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ["./countries.component.css"],
 })
 export class CountriesComponent implements OnInit {
-  //countries: DataResponse;
-  data:any;
+  data: any;
   title = (<any>worldmapConfig).title;
   type = (<any>worldmapConfig).type;
   columnNames = (<any>worldmapConfig).columnNames;
@@ -28,7 +22,7 @@ export class CountriesComponent implements OnInit {
   constructor(
     private countriesService: CountriesService,
     private spinner: NgxSpinnerService,
-    private toastr: ToastrService
+    private notification: NotificationService
   ) {}
 
   ngOnInit(): void {
@@ -38,20 +32,26 @@ export class CountriesComponent implements OnInit {
   getCountryDetailsForMap() {
     this.countriesService.getCountriesForMap().subscribe(
       (countries: any) => {
-        
         let mapData = [];
-        let countriesMap: Map <String, {c: Number, d: Number}> = new Map <String, {c: Number, d: Number}>();
-        countries.data.covid19Stats.forEach(element => {
-          
-          if(countriesMap.has(element.country)) {
+        let countriesMap: Map<String, { c: Number; d: Number }> = new Map<
+          String,
+          { c: Number; d: Number }
+        >();
+        countries.data.covid19Stats.forEach((element) => {
+          if (countriesMap.has(element.country)) {
             const x = countriesMap.get(element.country);
-            countriesMap.set(element.country,{c: x.c + element.confirmed, d: x.d + element.deaths});
-          }else{
-            countriesMap.set(element.country,{c:element.confirmed, d: element.deaths});
+            countriesMap.set(element.country, {
+              c: x.c + element.confirmed,
+              d: x.d + element.deaths,
+            });
+          } else {
+            countriesMap.set(element.country, {
+              c: element.confirmed,
+              d: element.deaths,
+            });
           }
-         
         });
-        countriesMap.forEach((v,k) =>{
+        countriesMap.forEach((v, k) => {
           let arr = [];
           arr.push(k);
           arr.push(v.c);
@@ -62,7 +62,7 @@ export class CountriesComponent implements OnInit {
         console.log(mapData);
         this.data = mapData;
         this.spinner.hide();
-        this.showSuccess();
+        this.notification.showSuccess("Data Loaded Successfully!");
         return this.data;
       },
       (error) => {
@@ -70,11 +70,8 @@ export class CountriesComponent implements OnInit {
       }
     );
   }
-  showSuccess() {
-    this.toastr.success('Covid Statistics', 'App Loaded Successfully!');
-  }
 
-   /* data = [
+  /* data = [
     ["UK", 200, 124],
     ["India", 300, 545],
     ["Brazil", 1400, 56],
