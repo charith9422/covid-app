@@ -33,7 +33,7 @@ import { ToastrModule } from "ngx-toastr";
     NgxSpinnerModule,
     GoogleChartsModule.forRoot(""),
     ToastrModule.forRoot({
-      timeOut: 5000,
+      timeOut: 3000,
       positionClass: "toast-top-right",
       preventDuplicates: true,
     }),

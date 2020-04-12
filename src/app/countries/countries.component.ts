@@ -56,17 +56,18 @@ export class CountriesComponent implements OnInit {
           arr.push(k);
           arr.push(v.c);
           arr.push(v.d);
-          console.log(arr);
+          //console.log(arr);
           mapData.push(arr);
         });
-        console.log(mapData);
+        //console.log(mapData);
         this.data = mapData;
         this.spinner.hide();
         this.notification.showSuccess("Data Loaded Successfully!");
         return this.data;
       },
       (error) => {
-        console.log(error);
+        this.notification.showError(error);
+        //console.log(error);
       }
     );
   }

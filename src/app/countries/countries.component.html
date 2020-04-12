@@ -3,19 +3,18 @@
 </ngx-spinner>
 <app-navbar></app-navbar>
 <app-head></app-head>
-<div class="container" style="padding-bottom: 5em;">
+<div class="container">
     <div *ngIf="data">
         <!-- <app-world-map *ngFor="let country of countries.data.covid19Stats" [country]="country"></app-world-map> -->
-        <div class="container map">
-            <google-chart #chart
+        <div class="map">
+            <google-chart class="chart" #chart
             [title]="title"
             [type]="type"
             [data]="data"
             [options]="options"
             [columnNames]="columnNames"
             [options]="options"
-            [width]="width"
-            [height]="height">
+        >
             </google-chart>
         </div>
     </div>

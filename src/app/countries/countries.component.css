@@ -10,8 +10,12 @@
 .card-text{
     text-align: center;
 }
-div.map{
-    padding-top: 5rem;
+.map{
+    margin-top: 5px;
+    margin-bottom: 8px;
+    max-width: inherit;
     overflow-x: scroll;
-    align-self: center;
+}
+.chart{
+    width: inherit;
 }

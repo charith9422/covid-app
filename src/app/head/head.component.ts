@@ -1,6 +1,5 @@
 import { Component, OnInit } from "@angular/core";
 import { CountriesService } from "../services/countries.service";
-import { MapCountry } from "../models/map-country";
 import { DataResponse } from '../models/data-response';
 
 @Component({
