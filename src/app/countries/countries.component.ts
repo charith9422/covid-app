@@ -8,6 +8,7 @@ import worldmapConfig from "../../assets/world-map.json";
 import { Worldmap } from "../models/worldmap";
 import { Country } from "../models/country";
 import { MapCountry } from "../models/map-country";
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: "app-countries",
@@ -16,7 +17,7 @@ import { MapCountry } from "../models/map-country";
 })
 export class CountriesComponent implements OnInit {
   //countries: DataResponse;
-  data;
+  data:any;
   title = (<any>worldmapConfig).title;
   type = (<any>worldmapConfig).type;
   columnNames = (<any>worldmapConfig).columnNames;
@@ -26,29 +27,14 @@ export class CountriesComponent implements OnInit {
 
   constructor(
     private countriesService: CountriesService,
-    private spinner: NgxSpinnerService
+    private spinner: NgxSpinnerService,
+    private toastr: ToastrService
   ) {}
 
   ngOnInit(): void {
     this.spinner.show();
     this.getCountryDetailsForMap();
-    this.spinner.hide();
-    //this.plotMap();
   }
-
-  /* getCountryDetails() {
-    this.countriesService.getCountries().subscribe(
-      (countries) => {
-        this.countries = countries;
-        //this.data = ;
-        this.spinner.hide();
-        console.log(countries);
-      },
-      (error) => {
-        console.log(error);
-      }
-    );
-  } */
   getCountryDetailsForMap() {
     this.countriesService.getCountriesForMap().subscribe(
       (countries: any) => {
@@ -75,12 +61,17 @@ export class CountriesComponent implements OnInit {
         });
         console.log(mapData);
         this.data = mapData;
+        this.spinner.hide();
+        this.showSuccess();
         return this.data;
       },
       (error) => {
         console.log(error);
       }
     );
+  }
+  showSuccess() {
+    this.toastr.success('Covid Statistics', 'App Loaded Successfully!');
   }
 
    /* data = [
