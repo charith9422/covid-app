@@ -19,7 +19,7 @@ export class HeadComponent implements OnInit {
   getDetails() {
     this.countriesService.getSriLankaDetails().subscribe((data) => {
       this.countries = data;
-      console.log(data);
+      //console.log(data);
     });
   }
 }

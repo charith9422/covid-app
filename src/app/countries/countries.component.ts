@@ -16,7 +16,7 @@ import { MapCountry } from "../models/map-country";
 })
 export class CountriesComponent implements OnInit {
   //countries: DataResponse;
-  data = this.getCountryDetailsForMap();
+  data;
   title = (<any>worldmapConfig).title;
   type = (<any>worldmapConfig).type;
   columnNames = (<any>worldmapConfig).columnNames;
@@ -31,7 +31,8 @@ export class CountriesComponent implements OnInit {
 
   ngOnInit(): void {
     this.spinner.show();
-    //this.getCountryDetailsForMap();
+    this.getCountryDetailsForMap();
+    this.spinner.hide();
     //this.plotMap();
   }
 
@@ -51,7 +52,7 @@ export class CountriesComponent implements OnInit {
   getCountryDetailsForMap() {
     this.countriesService.getCountriesForMap().subscribe(
       (countries: any) => {
-        this.spinner.hide();
+        
         let mapData = [];
         let countriesMap: Map <String, {c: Number, d: Number}> = new Map <String, {c: Number, d: Number}>();
         countries.data.covid19Stats.forEach(element => {
@@ -73,7 +74,8 @@ export class CountriesComponent implements OnInit {
           mapData.push(arr);
         });
         console.log(mapData);
-        return mapData;
+        this.data = mapData;
+        return this.data;
       },
       (error) => {
         console.log(error);
@@ -81,14 +83,9 @@ export class CountriesComponent implements OnInit {
     );
   }
 
-  plotMap(){
-    this.data = this.getCountryDetailsForMap();
-    return this.data;
-  }
-
-  /*  data = [
-    ["Germany", 200, 124],
-    ["United States", 300, 545],
+   /* data = [
+    ["UK", 200, 124],
+    ["India", 300, 545],
     ["Brazil", 1400, 56],
     ["Canada", 500, 874],
     ["France", 1600, 541],
@@ -96,5 +93,5 @@ export class CountriesComponent implements OnInit {
     ["Sri Lanka", 800, 0],
     ["India", 15800, 55],
     ["Australia", 12554, 12],
-  ]; */
+  ];  */
 }
