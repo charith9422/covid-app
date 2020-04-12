@@ -16,7 +16,7 @@ import { MapCountry } from "../models/map-country";
 })
 export class CountriesComponent implements OnInit {
   //countries: DataResponse;
-  data: MapCountry[] = [];
+  data;
   title = (<any>worldmapConfig).title;
   type = (<any>worldmapConfig).type;
   columnNames = (<any>worldmapConfig).columnNames;
@@ -32,6 +32,7 @@ export class CountriesComponent implements OnInit {
   ngOnInit(): void {
     this.spinner.show();
     this.getCountryDetailsForMap();
+    this.plotMap();
   }
 
   /* getCountryDetails() {
@@ -49,18 +50,40 @@ export class CountriesComponent implements OnInit {
   } */
   getCountryDetailsForMap() {
     this.countriesService.getCountriesForMap().subscribe(
-      (countries) => {
-        this.data = countries;
-        //debugger
-        //this.data = ;
+      (countries: any) => {
         this.spinner.hide();
-        console.log(this.data);
-        return this.data;
+        let mapData = [];
+        let countriesMap: Map <String, {c: Number, d: Number}> = new Map <String, {c: Number, d: Number}>();
+        countries.data.covid19Stats.forEach(element => {
+          
+          if(countriesMap.has(element.country)) {
+            const x = countriesMap.get(element.country);
+            countriesMap.set(element.country,{c: x.c + element.confirmed, d: x.d + element.deaths});
+          }else{
+            countriesMap.set(element.country,{c:element.confirmed, d: element.deaths});
+          }
+         
+        });
+        countriesMap.forEach((v,k) =>{
+          let arr = [];
+          arr.push(k);
+          arr.push(v.c);
+          arr.push(v.d);
+          console.log(arr);
+          mapData.push(arr);
+        });
+        console.log(mapData);
+        return mapData;
       },
       (error) => {
         console.log(error);
       }
     );
+  }
+
+  plotMap(){
+    this.data = this.getCountryDetailsForMap();
+    return this.data;
   }
 
   /*  data = [
