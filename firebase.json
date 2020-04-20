@@ -1,0 +1,19 @@
+{
+  "hosting": [
+    {
+      "target": "covid-app",
+      "public": "dist/covid-app",
+      "ignore": [
+        "firebase.json",
+        "**/.*",
+        "**/node_modules/**"
+      ],
+      "rewrites": [
+        {
+          "source": "**",
+          "destination": "/index.html"
+        }
+      ]
+    }
+  ]
+}

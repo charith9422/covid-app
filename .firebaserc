@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "covid19-5054d": {
+      "hosting": {
+        "covid-app": [
+          "covid19-5054d"
+        ]
+      }
+    }
+  }
+}
