@@ -1,7 +1,7 @@
 <div class="container" *ngIf="countries">
     <mat-card class="content" *ngFor="let srilanka of countries.data.covid19Stats">
         <mat-card-title style="text-align: center;">
-            <p class="mat-display-3">Sri Lanka Statistics</p>
+            <p class="mat-display-2">Covid-19 Statistics Sri Lanka</p>
         </mat-card-title>
         <mat-divider></mat-divider>
         <mat-card-content>
@@ -31,6 +31,13 @@
                     <h2 class="mat-body-strong texts">{{srilanka.recovered}}</h2>
                 </div>
             </div>
+            <div class="row">
+                <div class="col-md">
+                    <p><i><span>Last Update @ </span>{{countries.data.lastChecked | date:'full'}}</i></p>
+                </div>
+            </div>
+            
         </mat-card-content>
     </mat-card>
+    
 </div>

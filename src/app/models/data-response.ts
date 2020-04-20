@@ -1,3 +1,4 @@
+// tslint:disable-next-line:quotemark
 import { Country } from "./country";
 
 export interface DataResponse {

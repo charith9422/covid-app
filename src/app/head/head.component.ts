@@ -1,15 +1,15 @@
-import { Component, OnInit } from "@angular/core";
-import { CountriesService } from "../services/countries.service";
+import { Component, OnInit } from '@angular/core';
+import { CountriesService } from '../services/countries.service';
 import { DataResponse } from '../models/data-response';
 
 @Component({
-  selector: "app-head",
-  templateUrl: "./head.component.html",
-  styleUrls: ["./head.component.css"],
+  selector: 'app-head',
+  templateUrl: './head.component.html',
+  styleUrls: ['./head.component.css'],
 })
 export class HeadComponent implements OnInit {
   countries: DataResponse;
-  constructor(private countriesService: CountriesService) {}
+  constructor(private countriesService: CountriesService) { }
 
   ngOnInit(): void {
     this.getDetails();
@@ -18,7 +18,7 @@ export class HeadComponent implements OnInit {
   getDetails() {
     this.countriesService.getSriLankaDetails().subscribe((data) => {
       this.countries = data;
-      //console.log(data);
+      // console.log(data);
     });
   }
 }

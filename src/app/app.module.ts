@@ -15,6 +15,8 @@ import { HttpClientModule } from "@angular/common/http";
 import { NgxSpinnerModule } from "ngx-spinner";
 import { HeadComponent } from "./head/head.component";
 import { ToastrModule } from "ngx-toastr";
+import { WorldStatisticsComponent } from './world-statistics/world-statistics.component';
+import { AboutComponent } from './about/about.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +25,8 @@ import { ToastrModule } from "ngx-toastr";
     NavbarComponent,
     WorldMapComponent,
     HeadComponent,
+    WorldStatisticsComponent,
+    AboutComponent,
   ],
   imports: [
     BrowserModule,
