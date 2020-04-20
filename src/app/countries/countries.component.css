@@ -1,22 +1,29 @@
-.title{
-    text-align: center;
+.title {
+  text-align: center;
 }
-.texts{
-    text-align: center;
+.texts {
+  text-align: center;
 }
-.content{
-    margin-top: 1rem;
+.content {
+  margin-top: 1rem;
 }
-.card-text{
-    text-align: center;
+.card-text {
+  text-align: center;
 }
-.map{
-    margin-top: 5px;
-    margin-bottom: 8px;
-    overflow-x: scroll;
+.map {
+  margin-top: 5px;
+  margin-bottom: 8px;
+  overflow-x: scroll;
 }
-.chart{
+@media screen and (min-width: 600px) {
+  .chart {
     height: 600px;
-    width: 1150px;
-    
+    width: 100%;
+  }
+}
+@media screen and (max-width: 600px) {
+  .chart {
+    height: 600px;
+    max-width: 1150px;
+  }
 }
